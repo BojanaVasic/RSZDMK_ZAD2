@@ -133,8 +133,8 @@ int main()
 
 		for (int i = 0; i < 10; i++) {
 			if (!strcmp(ulaz, korisnici[i])) {
-			postoji = 1;
-			ime = i;
+				postoji = 1;
+				ime = i;
 			}
 		}
 
@@ -143,7 +143,7 @@ int main()
 			char password[4];
 
 			for (int counter = 0; counter < 4; counter++) {
-			while (!usartAvailable());
+				while (!usartAvailable());
 				_delay_ms(200);
 				password[counter] = usartGetChar();
 				usartPutString("*");
@@ -153,7 +153,7 @@ int main()
 
 			for (int i = 0; i < 4; i++) {
 				if(password[i] == PIN[ime][i]) {
-				tacno++;
+					tacno++;
 				}
 			}
 
