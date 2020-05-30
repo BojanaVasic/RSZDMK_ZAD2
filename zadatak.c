@@ -121,51 +121,51 @@ int main()
   
 	while(1)
 	{
-      int postoji = 0;
-      usartPutString("Unesite ime i prezime korisnika\r\n");
-      
-      while (!usartAvailable());
-      _delay_ms(500);
-      usartGetString(ulaz);
-  
-      sprintf(str, "Uneti korisnik je %s\r\n", ulaz);
-      usartPutString(str);
-      
-      for (int i = 0; i < 10; i++) {
-        if (!strcmp(ulaz, korisnici[i])) {
-          postoji = 1;
-          ime = i;
-        }
-      }
-      
-      if (postoji) {
-      	usartPutString("Unesite vas PIN\r\n");
-        char password[4];
-        
-        for (int counter = 0; counter < 4; counter++) {
-          while (!usartAvailable());
-          _delay_ms(500);
-          password[counter] = usartGetChar();
-          usartPutString("*");
-        }
-        
-        usartPutString("\r\n");
-        
-        for (int i = 0; i < 4; i++) {
-          if(password[i] == PIN[ime][i]) {
-          	tacno++;
-          }
-        }
-        
-        if (tacno == 4) {
-        	usartPutString("Uneti PIN je tacan\r\n");
-          	break;
-        } else {
-        	usartPutString("Uneti PIN nije tacan\r\n");
-        }
-      } else {
-      	usartPutString("Uneti korisnik ne postoji\r\n");
-      }
+		int postoji = 0;
+		usartPutString("Unesite ime i prezime korisnika\r\n");
+
+		while (!usartAvailable());
+		_delay_ms(500);
+		usartGetString(ulaz);
+
+		sprintf(str, "Uneti korisnik je %s\r\n", ulaz);
+		usartPutString(str);
+
+		for (int i = 0; i < 10; i++) {
+			if (!strcmp(ulaz, korisnici[i])) {
+			postoji = 1;
+			ime = i;
+			}
+		}
+
+		if (postoji) {
+			usartPutString("Unesite vas PIN\r\n");
+			char password[4];
+
+			for (int counter = 0; counter < 4; counter++) {
+			while (!usartAvailable());
+				_delay_ms(200);
+				password[counter] = usartGetChar();
+				usartPutString("*");
+			}
+
+			usartPutString("\r\n");
+
+			for (int i = 0; i < 4; i++) {
+				if(password[i] == PIN[ime][i]) {
+				tacno++;
+				}
+			}
+
+			if (tacno == 4) {
+				usartPutString("Uneti PIN je tacan\r\n");
+				break;
+			} else {
+				usartPutString("Uneti PIN nije tacan\r\n");
+			}
+		} else {
+			usartPutString("Uneti korisnik ne postoji\r\n");
+		}
 	}
 
 	return 0;
